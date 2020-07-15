@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MitraisWeb"
+    }
+  },
+  "defaultProject": "MitraisWeb",
+  "cli": {
+    "analytics": "18d47175-4ddf-410c-8509-a1514974b7e1"
+  }
 }

@@ -1,0 +1,5 @@
+<ng-container [formGroup]="formGroup">
+    <select [formControlName]="controlName">
+        <option *ngFor="let data of list" [value]="data.key">{{data.value}}</option>
+    </select>
+</ng-container> 
