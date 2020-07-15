@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiInterceptor } from './shared/api.interceptor';
 import { GenderService } from './shared/services/gender.service';
+import { UserService } from './shared/services/user.service';
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { TextboxComponent } from './shared/components/textbox/textbox.component';
@@ -40,6 +41,7 @@ import { SubmitButtonComponent } from './shared/components/submit-button/submit-
       multi: true
     },
     GenderService,
+    UserService,
     GenderResolver
   ],
   bootstrap: [AppComponent]

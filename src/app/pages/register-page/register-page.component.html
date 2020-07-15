@@ -1,8 +1,11 @@
 <div style="width: 70%;margin: auto">
     <h1>Registration</h1>
+    <div class="col-red" *ngIf="errorMessage" style="text-align: center;margin-bottom: 12px">
+        <label-component [text]="errorMessage"></label-component>
+    </div>
     <form [formGroup]="formGroup">
         <div class="input">
-            <textbox-component [formGroup]="formGroup" controlName="mobileNumber" placeholder="Mobile number">
+            <textbox-component [formGroup]="formGroup" [disabled]="disabled" controlName="mobileNumber" placeholder="Mobile number">
             </textbox-component>
             <div class="col-red" *ngIf="onValidate('mobileNumber', 'required')">
                 <label-component text="Required"></label-component>
@@ -12,14 +15,14 @@
             </div>
         </div>
         <div class="input">
-            <textbox-component [formGroup]="formGroup" controlName="firstName" placeholder="First name">
+            <textbox-component [formGroup]="formGroup" [disabled]="disabled" controlName="firstName" placeholder="First name">
             </textbox-component>
             <div class="col-red" *ngIf="onValidate('firstName', 'required')">
                 <label-component text="Required"></label-component>
             </div>
         </div>
         <div class="input">
-            <textbox-component [formGroup]="formGroup" controlName="lastName" placeholder="Last name">
+            <textbox-component [formGroup]="formGroup" [disabled]="disabled" controlName="lastName" placeholder="Last name">
             </textbox-component>
             <div class="col-red" *ngIf="onValidate('lastName', 'required')">
                 <label-component text="Required"></label-component>
@@ -41,10 +44,10 @@
             </div>
         </div>
         <div class="genders">
-            <radio-component [formGroup]="formGroup" controlName="gender" [list]="genders"></radio-component>
+            <radio-component [formGroup]="formGroup" [disabled]="disabled" controlName="gender" [list]="genders"></radio-component>
         </div>
         <div class="input">
-            <textbox-component [formGroup]="formGroup" controlName="email" placeholder="Email"></textbox-component>
+            <textbox-component [formGroup]="formGroup" [disabled]="disabled" controlName="email" placeholder="Email"></textbox-component>
             <div class="col-red" *ngIf="onValidate('email', 'required')">
                 <label-component text="Required"></label-component>
             </div>
@@ -52,6 +55,6 @@
                 <label-component text="Invalid email address"></label-component>
             </div>
         </div>
-        <submit-button [formGroup]="formGroup" value="Submit" (onClickEmit)="onSubmit()"></submit-button>
+        <submit-button [formGroup]="formGroup" value="Register" [disabled]="disabled" (onClickEmit)="onSubmit()"></submit-button>
     </form>
 </div>

@@ -11,6 +11,8 @@ export class TextboxComponent implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() controlName: string;
   @Input() placeholder: string;
+  @Input() disabled: boolean;
+
   constructor() { }
 
   ngOnInit(): void {

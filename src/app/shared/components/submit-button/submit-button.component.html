@@ -1,4 +1,4 @@
 <ng-container [formGroup]="formGroup">
-    <input type="submit" [disabled]="formGroup.invalid" [value]="value" (click)="onClick()" class="submit"
+    <input type="submit" [disabled]="formGroup.invalid || disabled" [value]="value" (click)="onClick()" class="submit"
         [ngStyle]="{'opacity': formGroup.invalid ? 0.5 : 1}">
 </ng-container>

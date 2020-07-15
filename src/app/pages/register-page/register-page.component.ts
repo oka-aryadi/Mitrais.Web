@@ -4,6 +4,9 @@ import * as moment from 'moment';
 import { KeyValuePair } from 'src/app/shared/interfaces/key-value-pair.interface';
 import { ActivatedRoute } from '@angular/router';
 import { mobileNumberValidator, emailValidator, validate } from '../../shared/custom-validator';
+import { PostUser, UserService } from 'src/app/shared/services/user.service';
+import { catchError, finalize, delay } from 'rxjs/operators';
+import { empty, of } from 'rxjs';
 
 @Component({
   selector: 'register-page',
@@ -17,8 +20,10 @@ export class RegisterPageComponent implements OnInit {
   dates: KeyValuePair[] = [{ key: '', value: 'Date' }];
   years: KeyValuePair[] = [{ key: '', value: 'Year' }];
   genders: KeyValuePair[] = [];
+  errorMessage: string;
+  disabled: boolean = true;
 
-  constructor(private activedRoute: ActivatedRoute) {
+  constructor(private activedRoute: ActivatedRoute, private userService: UserService) {
     this.formGroup = new FormGroup({
       mobileNumber: new FormControl('', [Validators.required, mobileNumberValidator]),
       firstName: new FormControl('', Validators.required),
@@ -28,7 +33,7 @@ export class RegisterPageComponent implements OnInit {
       year: new FormControl(''),
       gender: new FormControl(''),
       email: new FormControl('', [Validators.required, emailValidator]),
-    }, this.dateValidator);
+    }, this.dateValidator.bind(this));
 
     this.months.push(...moment.months().map((value, index) => {
       return { key: (index + 1).toString(), value: value }
@@ -50,21 +55,45 @@ export class RegisterPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formGroup);
+    this.disabled = true;
+    this.errorMessage = "";
+
+    let model = new PostUser();
+    model.mobileNumber = this.formGroup.controls.mobileNumber.value;
+    model.firstName = this.formGroup.controls.firstName.value;
+    model.lastName = this.formGroup.controls.lastName.value;
+    if (this.month && this.date && this.year) {
+      var momentObj = moment(`${this.month}-${this.date}-${this.year}`, "MM-DD-YYYY");
+      if (momentObj.isValid()) {
+        model.dateOfBirth = momentObj.toDate();
+      }
+    }
+
+    if (this.formGroup.controls.gender.value) {
+      model.genderId = this.formGroup.controls.gender.value;
+    }
+
+    model.email = this.formGroup.controls.email.value;
+    
+    this.userService.post(model)
+      .subscribe(
+        next => {
+
+        },
+        errorObj => {
+          this.errorMessage = errorObj.error;
+          this.disabled = false;
+        })
   }
 
-  dateValidator(form: FormGroup) {
-    const month = form.controls.month.value;
-    const date = form.controls.date.value;
-    const year = form.controls.year.value;
-
-    if (month || date || year) {
-      if (!month || !date || !year) {
+  dateValidator() {
+    if (this.month || this.date || this.year) {
+      if (!this.month || !this.date || !this.year) {
         return { invalidDate: true }
       }
 
-      const momentObj = moment(`${month}-${date}-${year}`, "MM-DD-YYYY");
-      if(!momentObj.isValid()) {
+      const momentObj = moment(`${this.month}-${this.date}-${this.year}`, "MM-DD-YYYY");
+      if (!momentObj.isValid()) {
         return { invalidDate: true }
       }
     }
@@ -74,6 +103,18 @@ export class RegisterPageComponent implements OnInit {
 
   onValidate(controlName, errorObj) {
     return validate(this.formGroup, controlName, errorObj);
+  }
+
+  get month(): string {
+    return this.formGroup ? this.formGroup.controls.month.value : '';
+  }
+
+  get date(): string {
+    return this.formGroup ? this.formGroup.controls.date.value : '';
+  }
+
+  get year(): string {
+    return this.formGroup ? this.formGroup.controls.year.value : '';
   }
 
 }

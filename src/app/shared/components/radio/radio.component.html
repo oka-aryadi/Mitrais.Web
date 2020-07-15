@@ -1,6 +1,6 @@
 <ng-container [formGroup]="formGroup" *ngIf="list">
     <div *ngFor="let data of list" style="display: inline;margin-right: 8px;">
-        <input type="radio" [formControlName]="controlName" [value]="data.key">
+        <input type="radio" [formControlName]="controlName" [value]="data.key" [disabled]="disabled">
         <label>{{data.value}}</label>
     </div>
 </ng-container> 

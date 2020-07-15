@@ -10,6 +10,7 @@ export class SubmitButtonComponent implements OnInit {
 
   @Input() formGroup: FormGroup;
   @Input() value: string;
+  @Input() disabled: boolean;
   @Output() onClickEmit = new EventEmitter();
   constructor() { }
 
