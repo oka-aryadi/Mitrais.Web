@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonComponent } from './shared/components/button/button.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiInterceptor } from './shared/api.interceptor';
@@ -16,17 +15,24 @@ import { LabelComponent } from './shared/components/label/label.component';
 import { RadioComponent } from './shared/components/radio/radio.component';
 import { GenderResolver } from './shared/resolvers/gender.resolver';
 import { SubmitButtonComponent } from './shared/components/submit-button/submit-button.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { FooterComponent } from './pages/register-page/footer/footer.component';
+import { SuccessComponent } from './pages/register-page/success/success.component';
+import { AnchorComponent } from './shared/components/anchor/anchor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonComponent,
     DropdownComponent,
     RegisterPageComponent,
     TextboxComponent,
     LabelComponent,
     RadioComponent,
-    SubmitButtonComponent
+    SubmitButtonComponent,
+    LoginPageComponent,
+    FooterComponent,
+    SuccessComponent,
+    AnchorComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ export class DropdownComponent implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() controlName;
   @Input() list: KeyValuePair[];
+  @Input() disabled: boolean;
 
   constructor() { }
 

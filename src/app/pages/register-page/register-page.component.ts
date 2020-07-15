@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { KeyValuePair } from 'src/app/shared/interfaces/key-value-pair.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { mobileNumberValidator, emailValidator, validate } from '../../shared/custom-validator';
 import { PostUser, UserService } from 'src/app/shared/services/user.service';
 import { catchError, finalize, delay } from 'rxjs/operators';
@@ -21,9 +21,9 @@ export class RegisterPageComponent implements OnInit {
   years: KeyValuePair[] = [{ key: '', value: 'Year' }];
   genders: KeyValuePair[] = [];
   errorMessage: string;
-  disabled: boolean = true;
+  disabled: boolean;
 
-  constructor(private activedRoute: ActivatedRoute, private userService: UserService) {
+  constructor(private activedRoute: ActivatedRoute, private userService: UserService, private router: Router) {
     this.formGroup = new FormGroup({
       mobileNumber: new FormControl('', [Validators.required, mobileNumberValidator]),
       firstName: new FormControl('', Validators.required),
@@ -78,7 +78,8 @@ export class RegisterPageComponent implements OnInit {
     this.userService.post(model)
       .subscribe(
         next => {
-
+          this.disabled = true;
+          this.router.navigate(['', 'success']);
         },
         errorObj => {
           this.errorMessage = errorObj.error;
