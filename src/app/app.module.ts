@@ -14,6 +14,7 @@ import { TextboxComponent } from './shared/components/textbox/textbox.component'
 import { LabelComponent } from './shared/components/label/label.component';
 import { RadioComponent } from './shared/components/radio/radio.component';
 import { GenderResolver } from './shared/resolvers/gender.resolver';
+import { SubmitButtonComponent } from './shared/components/submit-button/submit-button.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GenderResolver } from './shared/resolvers/gender.resolver';
     RegisterPageComponent,
     TextboxComponent,
     LabelComponent,
-    RadioComponent
+    RadioComponent,
+    SubmitButtonComponent
   ],
   imports: [
     BrowserModule,
