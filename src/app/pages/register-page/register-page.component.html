@@ -1,21 +1,48 @@
 <h1>Registration</h1>
-<div class="input">
-    <textbox-component [formGroup]="formGroup" controlName="mobileNumber" placeholder="Mobile number">
-    </textbox-component>
-</div>
-<div class="input">
-    <textbox-component [formGroup]="formGroup" controlName="firstName" placeholder="First name"></textbox-component>
-</div>
-<div class="input">
-    <textbox-component [formGroup]="formGroup" controlName="lastName" placeholder="Last name"></textbox-component>
-</div>
-<div>
-    <label-component text="Date of Birth"></label-component>
-</div>
-<div>
-    <dropdown-component [list]="months" [formGroup]="formGroup" controlName="month"></dropdown-component>
-    <div class="date-of-birth">
-        <dropdown-component [list]="dates" [formGroup]="formGroup" controlName="date"></dropdown-component>
+<form [formGroup]="formGroup">
+    <div class="input">
+        <textbox-component [formGroup]="formGroup" controlName="mobileNumber" placeholder="Mobile number">
+        </textbox-component>
+        <div class="col-red" *ngIf="onValidate('mobileNumber', 'required')">
+            <label-component text="Required"></label-component>
+        </div>
+        <div class="col-red" *ngIf="onValidate('mobileNumber', 'invalidMobileNumber')">
+            <label-component text="Please enter valid indonesian phone number +62"></label-component>
+        </div>
     </div>
-    <dropdown-component [list]="years" [formGroup]="formGroup" controlName="year"></dropdown-component>
-</div>
+    <div class="input">
+        <textbox-component [formGroup]="formGroup" controlName="firstName" placeholder="First name"></textbox-component>
+        <div class="col-red" *ngIf="onValidate('firstName', 'required')">
+            <label-component text="Required"></label-component>
+        </div>
+    </div>
+    <div class="input">
+        <textbox-component [formGroup]="formGroup" controlName="lastName" placeholder="Last name"></textbox-component>
+        <div class="col-red" *ngIf="onValidate('lastName', 'required')">
+            <label-component text="Required"></label-component>
+        </div>
+    </div>
+    <div>
+        <label-component text="Date of Birth"></label-component>
+    </div>
+    <div>
+        <dropdown-component [list]="months" [formGroup]="formGroup" controlName="month"></dropdown-component>
+        <div class="date-of-birth">
+            <dropdown-component [list]="dates" [formGroup]="formGroup" controlName="date"></dropdown-component>
+        </div>
+        <dropdown-component [list]="years" [formGroup]="formGroup" controlName="year"></dropdown-component>
+        <div class="col-red"
+            *ngIf="formGroup.controls.month.dirty || formGroup.controls.date.dirty || formGroup.controls.year.dirty || formGroup.controls.month.touched || formGroup.controls.date.touched || formGroup.controls.year.touched">
+            <label-component *ngIf="formGroup.errors && formGroup.errors.invalidDate" text="Invalid Date">
+            </label-component>
+        </div>
+    </div>
+    <div class="genders">
+        <radio-component [formGroup]="formGroup" controlName="gender" [list]="genders"></radio-component>
+    </div>
+    <div class="input">
+        <textbox-component [formGroup]="formGroup" controlName="email" placeholder="Email"></textbox-component>
+    </div>
+
+    <input type="submit" [disabled]="formGroup.invalid" (click)="onSubmit()" value="Register">
+</form>

@@ -12,6 +12,8 @@ import { DropdownComponent } from './shared/components/dropdown/dropdown.compone
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { TextboxComponent } from './shared/components/textbox/textbox.component';
 import { LabelComponent } from './shared/components/label/label.component';
+import { RadioComponent } from './shared/components/radio/radio.component';
+import { GenderResolver } from './shared/resolvers/gender.resolver';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { LabelComponent } from './shared/components/label/label.component';
     DropdownComponent,
     RegisterPageComponent,
     TextboxComponent,
-    LabelComponent
+    LabelComponent,
+    RadioComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { LabelComponent } from './shared/components/label/label.component';
       useClass: ApiInterceptor,
       multi: true
     },
-    GenderService
+    GenderService,
+    GenderResolver
   ],
   bootstrap: [AppComponent]
 })
