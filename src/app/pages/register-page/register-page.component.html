@@ -1,0 +1,21 @@
+<h1>Registration</h1>
+<div class="input">
+    <textbox-component [formGroup]="formGroup" controlName="mobileNumber" placeholder="Mobile number">
+    </textbox-component>
+</div>
+<div class="input">
+    <textbox-component [formGroup]="formGroup" controlName="firstName" placeholder="First name"></textbox-component>
+</div>
+<div class="input">
+    <textbox-component [formGroup]="formGroup" controlName="lastName" placeholder="Last name"></textbox-component>
+</div>
+<div>
+    <label-component text="Date of Birth"></label-component>
+</div>
+<div>
+    <dropdown-component [list]="months" [formGroup]="formGroup" controlName="month"></dropdown-component>
+    <div class="date-of-birth">
+        <dropdown-component [list]="dates" [formGroup]="formGroup" controlName="date"></dropdown-component>
+    </div>
+    <dropdown-component [list]="years" [formGroup]="formGroup" controlName="year"></dropdown-component>
+</div>

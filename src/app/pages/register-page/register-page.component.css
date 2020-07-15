@@ -1,0 +1,10 @@
+.input {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.date-of-birth {
+    margin-left: 8px;
+    margin-right: 8px;
+    display: inline;
+}
